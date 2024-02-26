@@ -1,16 +1,20 @@
 package com.shop.dto;
 
+import com.shop.entity.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
 public class MemberFormDto {
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    private Long id;
+
+    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     private String name;
 
     @NotEmpty(message = "이메일은 필수 입력 값입니다.")
@@ -22,8 +26,23 @@ public class MemberFormDto {
     private String password;
 
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
-    private String address;
+    private String zipCode;
+
+    private String stAdr;
+
+
+    private String dtlAdr;
 
     @NotEmpty(message = "전화번호는 필수 입력 값입니다.")
     private String tel;
+
+    @NotEmpty(message = "이메일 인증은 필수입니다.")
+    private String check;
+    @NotEmpty(message = "비밀번호 확인은 필수입니다.")
+    private String check2;
+    private static ModelMapper modelMapper = new ModelMapper();
+
+    public static MemberFormDto of(Member member){
+        return modelMapper.map(member, MemberFormDto.class);
+    }
 }

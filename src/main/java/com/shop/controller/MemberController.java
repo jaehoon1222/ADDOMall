@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+
+
 
     @GetMapping(value = "/new")
     public String memberForm(Model model){
@@ -32,14 +36,17 @@ public class MemberController {
         if(bindingResult.hasErrors()){
             return "member/memberForm";
         }
-        try {
-            Member member = Member.createMember(memberFormDto, passwordEncoder);
-            memberService.saveMember(member);
-        }catch(IllegalStateException e){
-            model.addAttribute("errorMessage",e.getMessage());
-            return "member/memberForm";
+        if(memberFormDto.getCheck2().equals("a")){
+            try {
+                Member member = Member.createMember(memberFormDto, passwordEncoder);
+                memberService.saveMember(member);
+            }catch(IllegalStateException e){
+                model.addAttribute("errorMessage",e.getMessage());
+                return "member/memberForm";
+            }
+            return "redirect:/";
         }
-        return "redirect:/";
+        return "member/memberForm";
     }
 
     @GetMapping(value = "/login")
@@ -47,9 +54,49 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
+    @GetMapping(value = "/socialLogin")
+    public String socialLogin(){
+        return "/member/socialLoginForm";
+    }
+
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg","아이디 또는 비밀번호를 확인해주세요");
         return "/member/memberLoginForm";
+    }
+
+    @GetMapping(value = "/myPage/userInfo")
+    public String myPage( Model model, Principal principal) {
+
+
+        MemberFormDto memberFormDto = memberService.getMemberInfo(principal.getName());
+        model.addAttribute("memberFormDto",memberFormDto);
+
+        return "/member/memberForm";
+    }
+
+    @GetMapping(value="/myPage")
+    public String myPage(){
+
+        return "member/myPage";
+    }
+
+    @PostMapping(value="/myPage/userInfo")
+    public String updateInfo(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Principal principal, Model model){
+        if(bindingResult.hasErrors()){
+            return "member/memberForm";
+        }
+        if(memberFormDto.getCheck().equals("a")){
+            try {
+                memberService.updateMember(memberFormDto,passwordEncoder);
+            }catch(IllegalStateException e){
+                model.addAttribute("errorMessage",e.getMessage());
+                return "member/memberForm";
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return "redirect:/";
+        }
+        return "member/memberForm";
     }
 }

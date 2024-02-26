@@ -26,7 +26,9 @@ public class Member extends BaseEntity{
 
     private String password;
 
-    private String address;
+    private String zipCode;
+    private String stAdr;
+    private String dtlAdr;
 
     private String tel;
     @Enumerated(EnumType.STRING)
@@ -36,11 +38,26 @@ public class Member extends BaseEntity{
         Member member = new Member();
         member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
-        member.setAddress(memberFormDto.getAddress());
+        member.setZipCode(memberFormDto.getZipCode());
+        member.setStAdr(memberFormDto.getStAdr());
+        member.setDtlAdr(memberFormDto.getDtlAdr());
         member.setTel(memberFormDto.getTel());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
+
+    public void updateMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
+        this.id = memberFormDto.getId();
+        this.name = memberFormDto.getName();
+        this.email = memberFormDto.getEmail();
+        this.password = passwordEncoder.encode(memberFormDto.getPassword());
+        this.zipCode = memberFormDto.getZipCode();
+        this.stAdr = memberFormDto.getStAdr();
+        this.dtlAdr = memberFormDto.getDtlAdr();
+        this.tel = memberFormDto.getTel();
+        setRole(Role.USER);
+    }
+
 }

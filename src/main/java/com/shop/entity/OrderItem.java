@@ -27,9 +27,6 @@ public class OrderItem extends BaseEntity{
 
     private int count;
 
-//    private LocalDateTime regTime;
-//
-//    private  LocalDateTime updateTime;
 
     //item(상품) -> OrderItem(주문 상품)
     public static OrderItem createOrderItem(Item item, int count){

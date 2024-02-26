@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @ToString
-// 용어는 참쉽다!!
 // 직렬화 자바 시스템에서 사용 할 수 있도록 바이트 스트림 형태로 연속 적인 데이터로
 // 포맷 변환 기술
 // Java Objec, Data -> Byte Stream
