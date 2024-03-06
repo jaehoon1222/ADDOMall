@@ -1,6 +1,7 @@
 package com.shop.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
+import com.shop.constant.Type;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,13 +10,15 @@ import lombok.Setter;
 public class MainItemDto {
     private Long id;
     private String itemNm;
+    private Type type;
     private String itemDetail;
     private String imgUrl;
     private Integer price;
     @QueryProjection //Querydsl 결과 조회 시 MainItemDto 객체로 바로 오도록  활용
-    public MainItemDto(Long id, String itemNm, String itemDetail, String imgUrl, Integer price){
+    public MainItemDto(Long id, String itemNm, Type type, String itemDetail, String imgUrl, Integer price){
         this.id = id;
         this.itemNm = itemNm;
+        this.type = type;
         this.itemDetail = itemDetail;
         this.imgUrl = imgUrl;
         this.price = price;

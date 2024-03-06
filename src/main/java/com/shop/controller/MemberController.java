@@ -36,7 +36,7 @@ public class MemberController {
         if(bindingResult.hasErrors()){
             return "member/memberForm";
         }
-        if(memberFormDto.getCheck2().equals("a")){
+        if(memberFormDto.getCheck().equals("a")&&memberFormDto.getCheck2().equals("a")){
             try {
                 Member member = Member.createMember(memberFormDto, passwordEncoder);
                 memberService.saveMember(member);
@@ -86,7 +86,7 @@ public class MemberController {
         if(bindingResult.hasErrors()){
             return "member/memberForm";
         }
-        if(memberFormDto.getCheck().equals("a")){
+        if(memberFormDto.getCheck2().equals("a")){
             try {
                 memberService.updateMember(memberFormDto,passwordEncoder);
             }catch(IllegalStateException e){

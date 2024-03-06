@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <th:block layout:fragment="css">
     <style>
-        .navbar-nav {
-            justify-content: center;
-        }
+
     </style>
 </th:block>
+
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light  border-bottom">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarTogglerDemo03"
@@ -17,15 +17,32 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/">Shop</a>
+            <a class="navbar-brand" href="/">
+                <img src="/img/ADDO_LOGO.jpg" alt="logo">
+            </a>
 
-            <form class="d-flex" th:action="@{/}" method="get">
-                <input name="searchQuery" class="form-control me-2 justify-content-center" type="search"
-                       placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0 text-end">
+                    <li class="nav-item text-end">
+                        <a class="nav-link text-end" href="/freeBoard">게시판</a>
+                    </li>
+                    <li class="nav-item text-end">
+                        <a class="nav-link text-end" href="/aBoard">공지사항</a>
+                    </li>
+                </ul>
+                <form class="d-flex" th:action="@{/}" method="get">
+                    <div class="input-group">
+                        <input name="searchQuery" class="form-control" type="search" style="width:320px;"
+                               placeholder="검색" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                         <a class="nav-link" href="/admin/item/new">상품 등록</a>
@@ -33,20 +50,48 @@
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                         <a class="nav-link" href="/admin/items">상품 관리</a>
                     </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link" href="/cart">장바구니</a>
                     </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link" href="/orders">구매이력</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/members/login">로그인</a>
                     </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="/members/new">회원가입</a>
+                    </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/members/logout">로그아웃</a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a class="nav-link" href="/members/myPage">마이페이지</a>
+                    </li>
                 </ul>
-
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light  border-bottom">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo04">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu/food">사료/분유</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu/snack">간식</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu/beauty">미용 용품</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu/pad">배변 패드</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu/toy">장난감</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

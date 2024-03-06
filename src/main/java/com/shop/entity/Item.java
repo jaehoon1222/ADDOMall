@@ -1,6 +1,7 @@
 package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
+import com.shop.constant.Type;
 import com.shop.dto.ItemFormDto;
 import com.shop.exception.OutOfStockException;
 import jakarta.persistence.*;
@@ -24,6 +25,9 @@ public class Item extends BaseEntity{
 
     @Column(nullable = false, length = 50)
     private String itemNm; // 상품명
+
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
     @Column(name="price", nullable = false)
     private int price; // 가격

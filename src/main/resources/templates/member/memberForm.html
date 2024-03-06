@@ -9,6 +9,15 @@
         .fieldError{
           color: #bd2130;
          }
+          .joinForm {
+            width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 25px;
+            color: #000;
+        }
     </style>
 </th:block>
 <!-- 사용자 스크립트 추가 -->
@@ -75,10 +84,6 @@
     }
 
 
-    function a(){
-
-    }
-
         function sendNumber(){
         var url = "/email";
         var paramData = {
@@ -122,53 +127,59 @@
         }else{
              if(number1 == number2){
                 alert("인증되었습니다.");
-                $("#a").attr("value","a");
                 $("#check").attr("value","a");
 
         }else{
             alert("번호가 다릅니다.");
+            $("#check").attr("value","");
         }
         }
 
     }
 
-        function checkPwd(){
 
-        var num1 = $("#password").val();
-        var num2 = $("#password2").val();
 
-        if(num2.length==0){
-            alert("비밀번호를 입력해주세요.");
-        }else{
-            if(num1==num2){
-                alert("비밀번호 확인");
-                $("#check2").attr("value","a");
-            }else{
-                alert("비밀번호가 다릅니다");
-            }
-        }
-        }
+        $(function() {
+            $('#password').keyup(function() {
+                $('#chkPw').html('');
+            });
+
+            $('#password2').keyup(function(){
+                if($('#password').val() != $('#password2').val()) {
+                    $('#chkPw').html('비밀번호 일치하지 않음');
+                    $('#chkPw').attr('style', 'color:#bd2130');
+                    $("#check2").attr("value","");
+                } else {
+                    $('#chkPw').html('비밀번호 일치');
+                    $('#chkPw').attr('style', 'color:#008100');
+                    $("#check2").attr("value","a");
+                }
+            });
+        });
+
+
     </script>
 
 
 </th:block>
 
 <div layout:fragment="content">
-    <form role="form" method="post" th:object="${memberFormDto}" class="pt-5">
+    <div class="joinForm">
+    <form role="form" method="post" th:object="${memberFormDto}" >
         <input type="hidden" th:field="*{id}">
         <div class="form-group">
             <label th:for="name">이름</label>
-            <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력해주세요.">
+            <input type="text" th:field="*{name}" class="form-control mt-1 mb-2" placeholder="이름을 입력해주세요.">
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect date</p>
         </div>
         <div class="form-group">
             <label th:for="email">이메일 주소</label>
-            <input type="text" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요.">
+            <input type="text" th:field="*{email}" class="form-control mt-1 mb-2" placeholder="이메일을 입력해주세요.">
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect date</p>
             <!-- 생략 -->
-            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
-            <input type="text" name="number" id="number" style="width:250px; margin-top: -10px" placeholder="인증번호 입력">
-            <button type="button"  onclick="confirmNumber()">이메일 인증</button>
+            <button type="button" class="btn btn-outline-dark py-1" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
+            <input type="text" class="form-control d-inline-flex" name="number" id="number" style="width:245px;" placeholder="인증번호 입력">
+            <button type="button" class="btn btn-outline-dark d-inline-flex py-1" onclick="confirmNumber()">이메일 인증</button>
             <input type="hidden" th:field="*{check}" name="check">
 
 
@@ -177,45 +188,54 @@
 
         <div class="form-group">
             <label th:for="password">비밀번호</label>
-            <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호 입력">
-            <input type="password" id="password2" class="form-control" placeholder="비밀번호 재입력">
+            <input type="password" th:field="*{password}" class="form-control mb-2" placeholder="비밀번호 입력">
+            <label th:for="password2">비밀번호 확인</label>
+            <input type="password" id="password2" class="form-control mb-2" placeholder="비밀번호 확인">
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect date</p>
-            <button type="button" onclick="checkPwd()">비밀번호 확인</button>
+            <span id="chkPw"></span>
             <input type="hidden" th:field="*{check2}" name="check2">
             <p th:if="${#fields.hasErrors('check2')}" th:errors="*{check2}" class="fieldError">Incorrect date</p>
         </div>
         <div class="form-group">
-            <button type="button" id="adrBtn" onclick="daumPost()" class="btn btn-secondary">우편번호 찾기</button>
+            <button type="button" id="adrBtn" onclick="daumPost()" class="btn btn-secondary mt-1 mb-2">우편번호 찾기</button>
         </div>
         <div class="form-group">
             <label th:for="zipCode">우편번호</label>
-            <input type="text" th:field="*{zipCode}" class="form-control" readonly>
+            <input type="text" th:field="*{zipCode}" class="form-control mt-1 mb-2" readonly>
             <p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}" class="fieldError">Incorrect date</p>
         </div>
         <div class="form-group">
             <label th:for="stAdr">도로명주소</label>
-            <input type="text" th:field="*{stAdr}" class="form-control" >
+            <input type="text" th:field="*{stAdr}" class="form-control mt-1 mb-2" >
             <p th:if="${#fields.hasErrors('stAdr')}" th:errors="*{stAdr}" class="fieldError">Incorrect date</p>
         </div>
         <div class="form-group">
             <label th:for="dtlAdr">상세주소</label>
-            <input type="text" th:field="*{dtlAdr}" class="form-control" >
+            <input type="text" th:field="*{dtlAdr}" class="form-control mt-1 mb-2" >
             <p th:if="${#fields.hasErrors('dtlAdr')}" th:errors="*{dtlAdr}" class="fieldError">Incorrect date</p>
         </div>
         <div class="form-group">
             <label th:for="tel">전화번호</label>
-            <input type="text" th:field="*{tel}" class="form-control" placeholder="전화번호를 입력해주세요.">
+            <input type="text" th:field="*{tel}" class="form-control mt-1 mb-2" placeholder="전화번호를 입력해주세요.">
             <p th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="fieldError">Incorrect date</p>
         </div>
-        <div th:if="${#strings.isEmpty(memberFormDto.id)} " style="text-align : center">
+        <div class="row mb-4">
+            <select th:field="*{role}" class="form-select ms-2" style="width:auto;">
+                <option value="ADMIN">관리자</option>
+                <option value="USER">사용자</option>
+            </select>
+        </div>
+        <div th:if="${#strings.isEmpty(memberFormDto.id)}   " style="text-align:center">
             <button th:formaction="@{/members/new}" type="submit" class="btn btn-primary">저장</button>
         </div>
-        <div th:unless="${#strings.isEmpty(memberFormDto.id)}" style="text-align : center">
+        <div th:unless="${#strings.isEmpty(memberFormDto.id)}" style="text-align:center">
             <button th:formaction="@{/members/myPage/userInfo}" type="submit" class="btn btn-primary">수정</button>
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="hidden" id="Confirm">
 
+
     </form>
+        </div>
 </div>
 </html>

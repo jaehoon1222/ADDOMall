@@ -20,7 +20,7 @@ public class MainController {
     private final ItemService itemService;
     @GetMapping(value = "/")
     public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model, Principal principal, HttpSession httpSession) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
         if(itemSearchDto.getSearchQuery() == null)
         {
             itemSearchDto.setSearchQuery("");

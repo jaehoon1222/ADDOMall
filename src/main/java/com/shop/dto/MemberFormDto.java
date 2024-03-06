@@ -1,5 +1,6 @@
 package com.shop.dto;
 
+import com.shop.constant.Role;
 import com.shop.entity.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,8 @@ public class MemberFormDto {
     private String check;
     @NotEmpty(message = "비밀번호 확인은 필수입니다.")
     private String check2;
+
+    private Role role;
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static MemberFormDto of(Member member){

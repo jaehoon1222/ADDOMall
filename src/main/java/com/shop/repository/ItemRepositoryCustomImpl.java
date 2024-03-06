@@ -76,7 +76,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
         //QMainItemDto @QueryProjection을 하용하면 DTO로 바로 조회 가능
-        QueryResults<MainItemDto> results = queryFactory.select(new QMainItemDto(item.id, item.itemNm,
+        QueryResults<MainItemDto> results = queryFactory.select(new QMainItemDto(item.id, item.itemNm, item.type,
                         item.itemDetail,itemImg.imgUrl,item.price))
                 // join 내부조인 .repImgYn.eq("Y") 대표이미지만 가져온다.
                 .from(itemImg).join(itemImg.item, item).where(itemImg.repImgYn.eq("Y"))

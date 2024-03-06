@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class ItemDto {
     private Long id;
     private String itemNm;
+    private String type;
     private Integer price;
     private String itemDetail;
     private String sellStatCd;
