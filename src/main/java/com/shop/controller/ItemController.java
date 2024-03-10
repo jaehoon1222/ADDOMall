@@ -54,7 +54,7 @@ public class ItemController {
         }
 
         try {
-            for (int i = 0; i< 24; i++) {
+            for(int i=0; i<20; i++) {
                 itemService.saveItem(itemFormDto, itemImgFileList);
             }
         }catch (Exception e){

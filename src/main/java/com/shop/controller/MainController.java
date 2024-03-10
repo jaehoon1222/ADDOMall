@@ -20,18 +20,21 @@ public class MainController {
     private final ItemService itemService;
     @GetMapping(value = "/")
     public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model, Principal principal, HttpSession httpSession) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         if(itemSearchDto.getSearchQuery() == null)
         {
             itemSearchDto.setSearchQuery("");
         }
-
-
-
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
-        System.out.println(items.getNumber()+"!!!!!!!!!!");
-        System.out.println(items.getTotalPages()+"#########");
+        Page<MainItemDto> items_food = itemService.getFoodItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items_snack = itemService.getSnackItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items_beauty = itemService.getBeautyItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items_fashion = itemService.getFashionItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);
+        model.addAttribute("items_food", items_food);
+        model.addAttribute("items_snack", items_snack);
+        model.addAttribute("items_beauty", items_beauty);
+        model.addAttribute("items_fashion", items_fashion);
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage",5);
         return "main";

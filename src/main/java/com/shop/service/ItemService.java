@@ -46,11 +46,10 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public ItemFormDto getItemDtl(Long itemId){
-        //Entity
+
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-        //DB에서 데이터를 가지고 옵니다.
-        //DTO
-        List<ItemImgDto> itemImgDtoList = new ArrayList<>(); //왜 DTO 만들었나요??
+
+        List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
         for(ItemImg itemimg : itemImgList){
             // Entity -> DTO
@@ -89,5 +88,35 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getFoodItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getFoodItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getSnackItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getSnackItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getBeautyItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getBeautyItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getPadItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getPadItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getToyItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getToyItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getFashionItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getFashionItemPage(itemSearchDto, pageable);
     }
 }

@@ -21,11 +21,11 @@ public class CategoryController {
     @GetMapping(value = {"/menu/food", "/menu/food/{page}"})
     public String foodList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 
-            Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+            Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
             if (itemSearchDto.getSearchQuery() == null) {
                 itemSearchDto.setSearchQuery("");
             }
-            Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+            Page<MainItemDto> items = itemService.getFoodItemPage(itemSearchDto, pageable);
                 model.addAttribute("items", items);
                 model.addAttribute("itemSearchDto", itemSearchDto);
                 model.addAttribute("maxPage", 5);
@@ -36,11 +36,11 @@ public class CategoryController {
     @GetMapping(value = {"/menu/snack", "/menu/snack/{page}"})
     public String snackList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
         if (itemSearchDto.getSearchQuery() == null) {
             itemSearchDto.setSearchQuery("");
         }
-        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items = itemService.getSnackItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
@@ -51,11 +51,11 @@ public class CategoryController {
     @GetMapping(value = {"/menu/beauty", "/menu/beauty/{page}"})
     public String beautyList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
         if (itemSearchDto.getSearchQuery() == null) {
             itemSearchDto.setSearchQuery("");
         }
-        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items = itemService.getBeautyItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
@@ -66,11 +66,11 @@ public class CategoryController {
     @GetMapping(value = {"/menu/pad", "/menu/pad/{page}"})
     public String padList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
         if (itemSearchDto.getSearchQuery() == null) {
             itemSearchDto.setSearchQuery("");
         }
-        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items = itemService.getPadItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
@@ -81,11 +81,26 @@ public class CategoryController {
     @GetMapping(value = {"/menu/toy", "/menu/toy/{page}"})
     public String toyList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 30);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
         if (itemSearchDto.getSearchQuery() == null) {
             itemSearchDto.setSearchQuery("");
         }
-        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        Page<MainItemDto> items = itemService.getToyItemPage(itemSearchDto, pageable);
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage", 5);
+
+        return "category/toy";
+    }
+
+    @GetMapping(value = {"/menu/fashion", "/menu/fashion/{page}"})
+    public String fashionList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 20);
+        if (itemSearchDto.getSearchQuery() == null) {
+            itemSearchDto.setSearchQuery("");
+        }
+        Page<MainItemDto> items = itemService.getFashionItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);

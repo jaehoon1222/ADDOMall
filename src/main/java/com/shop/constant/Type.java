@@ -10,7 +10,8 @@ public enum Type {
     SNACK("TYPE_SNACK"),
     TOY("TYPE_TOY"),
     PAD("TYPE_PAD"),
-    BEAUTY("TYPE_BEAUTY");
+    BEAUTY("TYPE_BEAUTY"),
+    FASHION("TYPE_FASHION");
 
     private final String value;
 }

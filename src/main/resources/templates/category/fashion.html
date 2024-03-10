@@ -13,7 +13,7 @@
 <div layout:fragment="content">
     <div class="titleHeader">
         <div class="menuTitle">
-            <h2>배변 패드</h2>
+            <h2>의류/패션</h2>
         </div>
     </div>
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
@@ -26,7 +26,7 @@
                     <div class="col mb-3">
                         <div class="card">
                             <a th:href="'/item/' + ${item.id}" class="text-dark">
-                                <div>
+                                <div style="height:220px;">
                                     <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
                                 </div>
                                 <div class="card-body mt-3">

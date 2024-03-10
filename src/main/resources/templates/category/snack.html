@@ -5,26 +5,30 @@
       layout:decorate="~{layouts/layout1}">
 
 <div layout:fragment="content">
+    <div class="titleHeader">
+        <div class="menuTitle">
+            <h2>간식</h2>
+        </div>
+    </div>
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>
-    <div class="container text-center">
+    <div class="container">
         <div class="row row-cols-5">
             <th:block th:each="item, status: ${items.getContent()}">
-                <div th:if="${item.type == T(com.shop.constant.Type).SNACK}">
-                    <div class="col">
-                        <div class="card">
-                            <a th:href="'/item/' + ${item.id}" class="text-dark">
-                                <div style="height:220px;">
-                                    <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">[[${item.itemNm}]]</h6>
-                                    <h6 class="card-title text-danger"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h6>
-                                </div>
-                            </a>
-                        </div>
+                <div class="col mb-3">
+                    <div class="card">
+                        <a th:href="'/item/' + ${item.id}" class="text-dark">
+                            <div>
+                                <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
+                            </div>
+                            <div class="card-body mt-3">
+                                <h5 class="item_name">[[${item.itemNm}]]</h5>
+                                <h6 class="item_detail">[[${item.itemDetail}]]</h6>
+                                <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </th:block>

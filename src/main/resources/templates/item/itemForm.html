@@ -47,8 +47,12 @@
 </th:block>
 
 <div layout:fragment="content">
+    <div class="titleHeader">
+        <div class="menuTitle">
+            <h2>상품 등록</h2>
+        </div>
+    </div>
     <form role="form" class="container" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
-        <p class="h2">상품 등록</p>
 
         <input type="hidden" th:field="*{id}">
 
@@ -66,6 +70,7 @@
                 <option value="PAD">배변 패드</option>
                 <option value="BEAUTY">미용 용품</option>
                 <option value="TOY">장난감</option>
+                <option value="FASHION">의류/패션</option>
             </select>
         </div>
 

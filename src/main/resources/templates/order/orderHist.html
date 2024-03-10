@@ -79,11 +79,15 @@
 </th:block>
 
 <div layout:fragment="content" class="content-mg">
-    <h2 class="mb-4">구매 이력</h2>
+    <div class="titleHeader">
+        <div class="menuTitle">
+            <h2>구매 이력</h2>
+        </div>
+    </div>
     <div th:each="order : ${orders.getContent()}">
         <div class="d-flex mb-3 align-self-center">
-            <h4 th:text="${order.orderDate} + '주문'"></h4>
-            <div class="ml-3">
+            <h4 class="ms-2" th:text="${order.orderDate} + '주문'"></h4>
+            <div class="ms-3">
                 <th:block th:if="${order.orderStatus == T(com.shop.constant.OrderStatus).ORDER}">
                     <button type="button" class="btn btn-outline-secondary" th:value="${order.orderId}"
                             onclick="cancelOrder(this.value)">주문취소</button>
@@ -101,7 +105,7 @@
                 <div class="align-self-center w-75">
                     <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
                     <div class="fs18 font-weight-light">
-                        <span th:text="${orderItem.orderPrice} +'원'"></span>
+                        <span class="h4 fw-bold" th:text="${#numbers.formatInteger(orderItem.orderPrice, 3, 'COMMA')} +'원'"></span>
                         <span th:text="${orderItem.count} +'개'"></span>
                     </div>
                 </div>
@@ -115,7 +119,7 @@
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${orders.number eq 0}?'disabled' : ''">
                 <a th:href="@{'/orders/'+ ${orders.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden="true">Previous</span>
+                    <span aria-hidden="true">이전</span>
                 </a>
             </li>
             <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
@@ -124,7 +128,7 @@
             </li>
             <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled' : ''">
                 <a th:href="@{'/orders/'+ ${orders.number+1}}" aria-label="Next" class="page-link">
-                    <span aria-hidden="true">Next</span>
+                    <span aria-hidden="true">다음</span>
                 </a>
             </li>
         </ul>

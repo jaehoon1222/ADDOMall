@@ -6,18 +6,6 @@
 
 <th:block layout:fragment="css">
     <style>
-        .carousel-inner > .item {
-            height : 350px;
-        }
-        .margin{
-            margin-bottom : 30px;
-        }
-        .banner{
-            height : 300px;
-            position :  absolute; top:0; left:0;
-            width: 100%;
-            height: 100%;
-        }
         .card-text{
             text-overflow : ellipsis;
             white-space : nowrap;
@@ -26,14 +14,20 @@
         a:hover{
             text-decoration:none;
         }
-        .center{
-            text-align:center;
-        }
-        .container{
+        .container_item{
             padding-right: 0;
             padding-left: 0;
             max-width:100%;
         }
+        .img_1 .img_2{
+            width: 100%;
+        }
+        .col{
+            margin-bottom:10rem;
+        }
+
+
+
     </style>
 </th:block>
 
@@ -65,22 +59,36 @@
         </button>
     </div>
 
+<!--    <div class="main-coupon mt-2 d-flex">-->
+<!--        <a href="#">-->
+<!--            <div class="coupon_1"><img class="img_1" src="/img/쿠폰1.jpg" alt="신년맞이 쿠폰"></div>-->
+<!--        </a>-->
+<!--        <a href="#">-->
+<!--            <div class="coupon_2"><img class="img_2" src="/img/쿠폰2.jpg" alt=""></div>-->
+<!--        </a>-->
+<!--    </div>-->
+
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+
+    <h3 style="margin-top:10rem;">
+        <span>영양 가득 아또몰 대표 사료!</span>
+    </h3>
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>
-    <div class="container mt-3">
+    <div class="container_item mt-3">
     <div class="row row-cols-5">
-        <th:block th:each="item, status: ${items.getContent()}">
-            <div class="col mb-3">
-                <div class="card" >
+        <th:block th:each="item, status: ${items_food.getContent()}">
+            <div class="col">
+                <div class="card">
                     <a th:href="'/item/' + ${item.id}" class="text-dark">
-                        <div style="height:220px;">
+                        <div>
                             <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
                         </div>
                         <div class="card-body mt-5">
-                            <h6 class="card-title">[[${item.itemNm}]]</h6>
-                            <h6 class="card-title text-danger"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h6>
+                            <h5 class="item_name">[[${item.itemNm}]]</h5>
+                            <h6 class="item_detail">[[${item.itemDetail}]]</h6>
+                            <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
                         </div>
                     </a>
                 </div>
@@ -88,27 +96,85 @@
         </th:block>
     </div>
     </div>
-    <div th:with="start=${(items.number/maxPage)*maxPage +1},
-        end=(${(items.totalPages == 0) ? 1 : (start + (maxPage-1) < items.totalPages ?
-        start + (maxPage - 1) : items.totalPages)})">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" th:classappend="${items.number eq 0}?'disabled'">
-                <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}"
-                   aria-label='Previous' class="page-link">
-                    <span aria-hidden="true">이전</span>
-                </a>
-            </li>
-            <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
-                th:classappend="${items.number eq page-1}?'active':''">
-                <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' +${page -1}}"
-                   th:inline="text" class="page-link">[[${page}]]</a>
-            </li>
-            <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled'">
-                <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number + 1}}"
-                   aria-label="Next" class="page-link">
-                    <span aria-hidden="true">다음</span>
-                </a>
-            </li>
-        </ul>
+
+    <h3>
+        <span>강아지 간식은 이걸로 끝!</span>
+    </h3>
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
+    </div>
+    <div class="container_item mt-3">
+        <div class="row row-cols-5">
+            <th:block th:each="item, status: ${items_snack.getContent()}">
+                <div class="col">
+                    <div class="card">
+                        <a th:href="'/item/' + ${item.id}" class="text-dark">
+                            <div>
+                                <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
+                            </div>
+                            <div class="card-body mt-5">
+                                <h5 class="item_name">[[${item.itemNm}]]</h5>
+                                <h6 class="item_detail">[[${item.itemDetail}]]</h6>
+                                <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <h3>
+        <span>우리 강아지 피부는 소중하니까</span>
+    </h3>
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
+    </div>
+    <div class="container_item mt-3 ">
+        <div class="row row-cols-5">
+            <th:block th:each="item, status: ${items_beauty.getContent()}">
+                <div class="col">
+                    <div class="card">
+                        <a th:href="'/item/' + ${item.id}" class="text-dark">
+                            <div>
+                                <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
+                            </div>
+                            <div class="card-body mt-5">
+                                <h5 class="item_name">[[${item.itemNm}]]</h5>
+                                <h6 class="item_detail">[[${item.itemDetail}]]</h6>
+                                <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <h3>
+        <span>새 옷 입고 봄나들이 가요!</span>
+    </h3>
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
+    </div>
+    <div class="container_item mt-3">
+        <div class="row row-cols-5">
+            <th:block th:each="item, status: ${items_fashion.getContent()}">
+                <div class="col">
+                    <div class="card">
+                        <a th:href="'/item/' + ${item.id}" class="text-dark">
+                            <div>
+                                <img th:src="${item.imgUrl}" class="card-img" th:alt="${item.itemNm}">
+                            </div>
+                            <div class="card-body mt-5">
+                                <h5 class="item_name">[[${item.itemNm}]]</h5>
+                                <h6 class="item_detail">[[${item.itemDetail}]]</h6>
+                                <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
     </div>
 </div>

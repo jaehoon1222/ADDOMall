@@ -29,10 +29,7 @@ public class OrderController {
     public @ResponseBody
     ResponseEntity order(@RequestBody @Valid OrderDto orderDto, BindingResult bindingResult,
                          Principal principal){
-        // String a = "abc" + "def"
-        // StringBuilder a;
-        // a.append("abc");
-        // a.append("def");
+
         if(bindingResult.hasErrors()){
             StringBuilder sb = new StringBuilder();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();

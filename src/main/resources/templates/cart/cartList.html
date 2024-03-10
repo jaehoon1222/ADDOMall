@@ -23,7 +23,6 @@
                 var count = $("#count_" + cartItemId).val();
                 orderTotalPrice += price * count;
             });
-
             $("#orderTotalPrice").html(orderTotalPrice+'원');
         }
 
@@ -184,7 +183,11 @@
 </th:block>
 
 <div layout:fragment="content" class="content-mg">
-    <h2 class="mb-4">장바구니 목록</h2>
+    <div class="titleHeader">
+        <div class="menuTitle">
+            <h2>장바구니 목록</h2>
+        </div>
+    </div>
     <div>
         <table class="table">
             <colgroup>
@@ -215,9 +218,9 @@
                         <div class="fs18 font-weight-light">
                                 <span class="input-group mt-2">
                                     <span th:id="'price_' + ${cartItem.cartItemId}" th:data-price="${cartItem.price}"
-                                          th:text="${cartItem.price} + '원'" class="align-self-center mr-2">
+                                          th:text="${#numbers.formatInteger(cartItem.price, 3 , 'COMMA')} + '원'" class="align-self-center mr-2">
                                     </span>
-                                    <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
+                                    <input type="number" class="ms-2" name="count" th:id="'count_' + ${cartItem.cartItemId}"
                                            th:value="${cartItem.count}" min="1" onchange="changeCount(this)">
                                     <button type="button" class="close" aria-label="Close">
                                         <span aria-hidden="true" th:data-id="${cartItem.cartItemId}"
@@ -228,8 +231,8 @@
                     </div>
                 </td>
                 <td class="text-center align-middle">
-                    <span th:id="'totalPrice_'+${cartItem.cartItemId}" name="totalPrice"
-                          th:text="${cartItem.price * cartItem.count} + '원'"></span>
+                    <span th:id="'totalPrice_'+${cartItem.cartItemId}" name="totalPrice" class="h4 fw-bold"
+                          th:text="${#numbers.formatInteger(cartItem.price * cartItem.count, 3 , 'COMMA')} + '원'"></span>
                 </td>
             </tr>
             </tbody>
