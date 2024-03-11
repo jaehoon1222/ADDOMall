@@ -95,3 +95,8 @@ a{
      color: #333;
      background: rgb(255, 255, 255);
 }
+
+.nav-link{
+    font-weight:600;
+    color:#333;
+}

@@ -117,7 +117,9 @@ public class ItemController {
         Member member = null;
         if(principal != null){
             member = memberService.findingMember(principal.getName());
-            model.addAttribute("member", member);
+            System.out.println(member);
+            System.out.println(member.getEmail());
+            model.addAttribute("member", member.getEmail());
         }
         return "item/itemDtl";
     }

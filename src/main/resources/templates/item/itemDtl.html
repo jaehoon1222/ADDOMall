@@ -28,40 +28,79 @@
         function order(){
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
+            let loginMm = [[${member}]];
 
-            var url = "/order";
-            var paramData = {
-                itemId : $("#itemId").val(),
-                count : $("#count").val()
+            if( loginMm == null ) {
+                alert("로그인 후 이용해주세요.");
+                location.href = "/members/login";
             }
 
-            var param = JSON.stringify(paramData);
+            // 아임포트에 결제 정보 넘길 값
+            var today = new Date();
+            var hours = today.getHours();
+            var minutes = today.getMinutes();
+            var seconds = today.getSeconds();
+            var milliseconds = today.getMilliseconds();
+            var makeMerchantUid = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
+            var itemName = $("#itemName").val();
+            var price = $("#totalPrice").text();
 
-            $.ajax({
-                url : url,
-                type : "POST",
-                contentType : "application/json",
-                data : param,
-                beforeSend : function(xhr){
-                    /*데이터 전송하기 전에 헤더의 csrf 값을 설정*/
-                    xhr.setRequestHeader(header, token);
-                },
-                dataType : "json",
-                cache : false,
-                success : function(result, status){
-                    alert("주문이 완료 되었습니다.");
-                    location.href='/';
-                },
-                error : function(jqXHR, status, error){
-                    if(jqXHR.status == '401'){
-                        alert('로그인 후 이용해주세요.');
-                        location.href='/members/login';
-                    }else{
-                        alert(jqXHR.responseText);
+            // 결제 요청
+            var IMP = window.IMP;
+            IMP.init("imp00220008");
+
+            IMP.request_pay({
+                pg: "kakaopay.TC0ONETIME",
+                pay_method: "card",
+                merchant_uid: makeMerchantUid,
+                name: itemName,
+                amount: price,
+                buyer_email: loginMm,
+            }, function (rsp) {
+                if (rsp.success) {
+                    var dataList = new Array();
+                    var paramData = new Object();
+
+                    var url = "/order";
+
+                    var paramData = {
+                        itemId : $("#itemId").val(),
+                        count : $("#count").val()
                     }
+
+                    var param = JSON.stringify(paramData);
+
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        contentType: "application/json",
+                        data: param,
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader(header, token);
+                        },
+                        dataType: "json",
+                        cache: false,
+                        success: function(result, status){
+                            alert("주문이 완료 되었습니다.");
+                            location.href = "/";
+                        },
+                        error: function(jqXHR, status, error){
+                            if(jqXHR.state == '401'){
+                                alert("로그인 후 이용해주세요.");
+                                location.href = "/members/login";
+                            } else {
+                                alert(jqXHR.responseText);
+                            }
+                        }
+                    });
+                } else {
+                    var msg = "결제에 실패하였습니다.";
+                    msg += "에러 내용 : " + rsp.error_msg;
+                    alert(msg);
                 }
             });
-         }
+
+        }
 
         function addCart(){
             var token = $("meta[name='_csrf']").attr("content");
@@ -144,6 +183,7 @@
                   class="badge bg-primary mgb-15">판매중</span>
             <span th:unless="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}"
                   class="badge bg-primary mgb-15">품절</span>
+            <input type="hidden" th:value="${item.itemNm}" id="itemName" name="itemNm">
             <h4 class="item_name" th:text="${item.itemNm}" style="font-weight:bold;"></h4>
             <h6 class="item_detail">[[${item.itemDetail}]]</h6>
             <hr class="my-4">
@@ -180,7 +220,7 @@
                  class="text-right">
                 <button type="button" class="btn_add_cart" onclick="addCart()">
                     장바구니 담기</button>
-                <button type="button" class="btn_order" onclick="order()">주문하기</button>
+                <button type="button" class="btn_order" onclick="order()" th:data-id="${item.id}">주문하기</button>
             </div>
             <div th:unless="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}"
                  class="text-right">
