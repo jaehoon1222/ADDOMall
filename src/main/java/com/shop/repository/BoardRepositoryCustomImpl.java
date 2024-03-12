@@ -53,7 +53,7 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
     }
 
     @Override
-    public Page<BoardContent> getABoardPage(BoardSearchDto boardSearchDto, Pageable pageable) {
+    public Page<BoardContent> getnoticePage(BoardSearchDto boardSearchDto, Pageable pageable) {
 
         QueryResults<BoardContent> results = queryFactory
                 .selectFrom(QBoardContent.boardContent)

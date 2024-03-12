@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        function quickFunction(){
+            $(".moveScrollTop").click(function(e) {
+                e.preventDefault();
+                $("body, html").stop().animate({scrollTop:0}, 500);
+            });
+            $(".moveScrollBottom").click(function(e) {
+                e.preventDefault();
+                $("body, html").stop().animate({scrollTop:$('body').height()}, 500);
+            });
+        }
+    </script>
+</th:block>
+<div class="aside" th:fragment="aside">
+    <aside>
+        <div id="scrollRight">
+            <div class="quickBtn">
+                <div class="displayBtn"></div>
+                <ul>
+                    <li class="moveScrollTop" onclick="quickFunction()"></li>
+                    <li><a href="/orders"><img src="https://cdn-pro-web-218-5.cdn-nhncommerce.com/gegomatr6642_godomall_com/data/skin/front/mplshop/_mplshop/images/quick/q_delv.png" alt="" title=""><span class="title">주문조회</span></a></li>
+                    <li><a href="/notice"><img src="https://cdn-pro-web-218-5.cdn-nhncommerce.com/gegomatr6642_godomall_com/data/skin/front/mplshop/_mplshop/images/quick/q_notice.png" alt="" title=""><span class="title">공지사항</span></a></li>
+                    <li><a href="/cart"><strong class="cartCnt">0</strong><span class="title">장바구니</span></a></li>
+                    <li class="moveScrollBottom" onclick="quickFunction()"></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+</html>

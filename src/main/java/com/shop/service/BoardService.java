@@ -63,7 +63,7 @@ public class BoardService {
     }
 
 
-    public BoardContent updateABoard (BoardContentDto boardContentDto){
+    public BoardContent updateNotice (BoardContentDto boardContentDto){
         BoardContent boardContent = em.find(BoardContent.class, boardContentDto.getId());
 
         boardContent.setBoardName(boardContentDto.getBoardName());
@@ -83,8 +83,8 @@ public class BoardService {
         return boardRepository.getBoardPage(boardSearchDto , pageable);
     }
     @Transactional(readOnly = true)
-    public Page<BoardContent> getABoardPage(BoardSearchDto boardSearchDto , Pageable pageable){
-        return boardRepository.getABoardPage(boardSearchDto , pageable);
+    public Page<BoardContent> getnoticePage(BoardSearchDto boardSearchDto , Pageable pageable){
+        return boardRepository.getnoticePage(boardSearchDto , pageable);
     }
 
 

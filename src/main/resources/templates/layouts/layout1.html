@@ -18,7 +18,8 @@
 
     <!-- payment -->
     <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    </script>
+    <!-- JS -->
+    <script type="text/javascript" th:src="@{/js/aside.js}"></script>
 
 
     <th:block layout:fragment="script"></th:block>
@@ -26,6 +27,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/header::header}"></div>
+<div th:replace="~{fragments/aside::aside}"></div>
 
 <div layout:fragment="content" class="content">
 

@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
-
+<script type="text/javascript" src="/js/order.js"></script>
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function(){
@@ -99,7 +99,6 @@
                     alert(msg);
                 }
             });
-
         }
 
         function addCart(){

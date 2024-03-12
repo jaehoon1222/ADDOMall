@@ -97,8 +97,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                         item.itemDetail,itemImg.imgUrl,item.price))
                 // join 내부조인 .repImgYn.eq("Y") 대표이미지만 가져온다.
                 .from(itemImg).join(itemImg.item, item).where(itemImg.repImgYn.eq("Y"))
-                .where(item.type.eq(Type.FOOD))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .where(item.type.eq(Type.FOOD))
                 .orderBy(item.id.desc()).offset(pageable.getOffset()).limit(pageable.getPageSize()).fetchResults();
         List<MainItemDto> content = results.getResults();
         long total = results.getTotal();

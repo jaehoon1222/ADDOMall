@@ -48,7 +48,9 @@ public class CartController {
     public String orderHist(Principal principal, Model model){
         List<CartDetailDto> cartDetailDtoList = cartService.getCartList(principal.getName());
         model.addAttribute("cartItems",cartDetailDtoList);
-        return "/cart/cartList";
+        model.addAttribute("member",principal.getName());
+        System.out.println(principal.getName());
+        return "cart/cartList";
     }
 
     @PatchMapping(value = "/cartItem/{cartItemId}")

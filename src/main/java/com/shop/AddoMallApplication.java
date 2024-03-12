@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.TimeZone;
 
 @SpringBootApplication
-public class ShopTeacherApplication {
+public class AddoMallApplication {
 
 	@PostConstruct
 	public void started() {
@@ -16,7 +16,7 @@ public class ShopTeacherApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShopTeacherApplication.class, args);
+		SpringApplication.run(AddoMallApplication.class, args);
 	}
 
 }

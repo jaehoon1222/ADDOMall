@@ -11,6 +11,6 @@ import java.util.List;
 public interface BoardRepositoryCustom {
 
     Page<BoardContent> getBoardPage(BoardSearchDto boardSearchDto, Pageable pageable);
-    Page<BoardContent> getABoardPage(BoardSearchDto boardSearchDto, Pageable pageable);
+    Page<BoardContent> getnoticePage(BoardSearchDto boardSearchDto, Pageable pageable);
     List<Comment> getComment(Long id);
 }

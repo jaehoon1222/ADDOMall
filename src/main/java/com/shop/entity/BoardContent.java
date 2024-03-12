@@ -44,7 +44,7 @@ public class BoardContent extends BaseTimeEntity {
          return boardContent;
     }
 
-    public  static  BoardContent createABoardContent(BoardContentDto boardContentDto){
+    public  static  BoardContent createnoticeContent(BoardContentDto boardContentDto){
         BoardContent boardContent = new BoardContent();
 
         boardContent.setName(boardContentDto.getName());

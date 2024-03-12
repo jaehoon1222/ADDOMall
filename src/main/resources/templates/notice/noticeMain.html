@@ -19,7 +19,7 @@
 
             var searchQuery = $("#searchQuery").val();
             var searchType = $("#searchType").val();
-            location.href="/aBoard/" + page + "?searchType=" + searchType
+            location.href="/notice/" + page + "?searchType=" + searchType
             + "&searchQuery=" + searchQuery;
         }
     </script>
@@ -57,7 +57,7 @@
 
     <div class="boardSize mt-2 border-top">
 
-        <form th:action="@{'/freeBoard/' + ${boardContents.number}}" role="form" method="get"
+        <form th:action="@{'/notice/' + ${boardContents.number}}" role="form" method="get"
               th:object="${boardContents}">
 
             <table class="table">
@@ -75,7 +75,7 @@
                 <tr th:each="boardContent, status: ${boardContents.getContent()}" class="borderBottom">
                     <td th:text="공지" width="100px"></td>
                     <td width="500px">
-                        <a th:href="'/aBoard/form/'+${boardContent.id}" th:text="${boardContent.boardName}"></a>
+                        <a th:href="'/notice/form/'+${boardContent.id}" th:text="${boardContent.boardName}"></a>
                     </td>
                     <td th:text="${boardContent.name}" width="200px"></td>
                     <td th:text="${#temporals.format(boardContent.regTime,'yyyy-MM-dd HH:mm')}" width="200px"></td>
@@ -85,7 +85,7 @@
 
             <div>
                 <input type="button" class="btn btn-primary" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" value="글쓰기"
-                       onclick="location.href='/aBoard/new'">
+                       onclick="location.href='/notice/new'">
             </div>
 
             <div th:with="start=${(boardContents.number/maxPage)*maxPage + 1},
@@ -123,23 +123,14 @@
                         <option value="name">작성자</option>
                         <option value="boardName">제목</option>
                     </select>
-
-
                 </div>
                 <div class="col-auto">
                     <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
-
                 </div>
-
-
                 <div class="col-auto">
                     <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
                 </div>
-
-
             </div>
-
-
         </form>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </div>

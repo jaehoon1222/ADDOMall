@@ -64,6 +64,7 @@ a{
     float: right;
     font-size: 1rem;
     color:#8D8D8D;
+    margin-top:1.25rem;
 }
 
 .btn_add_cart{
@@ -100,3 +101,73 @@ a{
     font-weight:600;
     color:#333;
 }
+
+.mainTitle{
+    margin-top:10rem;
+    font-weight:600;
+    font-size:1.75rem;
+}
+
+li{
+    list-style:none;
+}
+
+.card-text{
+    text-overflow : ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+.container_item{
+     padding-right: 0;
+     padding-left: 0;
+     max-width:100%;
+     clear:right;
+}
+
+.img_1 .img_2{
+     width: 100%;
+}
+.col{
+    margin-bottom:5rem;
+}
+
+.searchTitle{
+    font-size:1.5rem;
+    font-weight:500;
+    color:#333;
+    margin-left: 6.5rem;
+
+}
+
+.form-control{
+    font-weight:600;
+}
+
+.search-form{
+    text-align:center;
+}
+
+#scrollRight{
+    right: 0px;
+    opacity: 1;
+    position: fixed;
+}
+#scrollRight .quickBtn { position: absolute; top: 100px; right: 0px; width: 42px; z-index: 1;}
+#scrollRight .quickBtn li { float: right;  border: 1px solid #eaeaea; margin-top: -1px; background-color: #fff; }
+#scrollRight .quickBtn li a {
+	position: relative; display: block; width: 40px; height: 40px; font-size: 0; white-space: nowrap;
+	transition: width .25s ease;
+}
+#scrollRight .quickBtn li .title { display: inline-block; width: 80px; height: 40px; line-height: 40px; border-left: 1px solid #eaeaea;  overflow: hidden; text-align: center; background: #fff; color: #000; font-size: 12px;}
+#scrollRight .quickBtn li:hover a { width: 121px;}
+#scrollRight .quickBtn li img,
+#scrollRight .quickBtn li .cartCnt{ vertical-align: top; }
+
+#scrollRight .quickBtn .cartCnt { display: inline-block; width: 40px; height: 40px; line-height: 44px; text-align: center; background: url("/img/ico_cart.png") no-repeat center; color: #fff; font-size: 10px;}
+#scrollRight .quickBtn .moveScrollTop { width: 41.14px !important; height: 40px; background-image: url("/img/arrow_top.png"); background-repeat: no-repeat; background-position:center; cursor:pointer; }
+#scrollRight .quickBtn .moveScrollBottom { width: 41.14px !important; height: 40px; background-image: url("/img/arrow_bottom.png"); background-repeat: no-repeat; background-position:center; cursor:pointer; }

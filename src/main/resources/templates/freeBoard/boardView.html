@@ -2,16 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-
-
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
-
 <th:block layout:fragment="script">
-
-
     <script th:inline="javascript">
 
         function reCommentView(a){
@@ -113,11 +108,6 @@
         }
 
 
-
-
-
-
-
         <!-- 대 댓글 입력 함수 -->
         function reComment(contentId) {
 
@@ -161,24 +151,13 @@
                 }else{
                     alert(response);
                     location.reload();
-
                 }
-
-
-
-
-
             },
             error : function(jqXHR, status , error){
                 alert(jqXHR.responseText);
             }
             });
         }
-
-
-
-
-
          function deleteComment(contentId) {
 
             var a = "inputPW"+contentId;
@@ -205,31 +184,19 @@
                         xhr.setRequestHeader(header, token);
             },
             success: function(response){
-
-
                 if(response==="삭제완료"){
                     alert("삭제되었습니다.");
                     location.reload();
                 }
-
                 if(response==="비밀번호"){
                     alert("비밀번호가 틀립니다..");
-
                 }
-
-
-
-
             },
             error : function(jqXHR, status , error){
                 alert(jqXHR.responseText);
             }
             });
         }
-
-
-
-
          function deleteComment2(contentId) {
 
             var a = "inputPW2"+contentId;
@@ -256,42 +223,22 @@
                         xhr.setRequestHeader(header, token);
             },
             success: function(response){
-
-
                 if(response==="삭제완료"){
                     alert("삭제되었습니다.");
                     location.reload();
                 }
-
                 if(response==="비밀번호"){
                     alert("비밀번호가 틀립니다..");
-
                 }
-
-
-
-
             },
             error : function(jqXHR, status , error){
                 alert(jqXHR.responseText);
             }
             });
         }
-
-
-
-
-
     </script>
 </th:block>
-
-
-
-
-
 <th:block layout:fragment="css">
-
-
     <style>
         .carousel-inner > .item {
             height: 350px;
@@ -429,178 +376,137 @@
             border: 3px solid red;
             border-radius:10px;
         }
-
-
-
-
-
     </style>
 </th:block>
-
-
 <div layout:fragment="content">
-
-
-
-
     <section class="boardSize">
         <form action="/freeBoard/new" role="form" method="post" th:object="${boardContentDto}">
-        <div class="href-target" id="input-types"></div>
-        <h1 th:text="*{boardName}">
-        </h1>
-
-
-            <span class="spanRight" th:text="*{name}"></span>  <span class="spanaaa" th:text="*{#temporals.format(regTime,'yyyy-MM-dd HH:mm')}"></span>
-
-
-        <hr>
-
-
-        <div class="nice-form-group h300px abc" >
-
-            <div  style="white-space:pre;" th:text="*{content}" ></div>
-
-
-        </div>
+            <div class="href-target" id="input-types"></div>
+            <h1 th:text="*{boardName}">
+            </h1>
+            <span class="spanRight" th:text="*{name}"></span> <span class="spanaaa"
+                                                                    th:text="*{#temporals.format(regTime,'yyyy-MM-dd HH:mm')}"></span>
+            <hr>
+            <div class="nice-form-group h300px abc">
+                <div style="white-space:pre;" th:text="*{content}"></div>
+            </div>
             <hr>
             <br>
-
-
-
-        <div class="bottomDiv m-2">
-
-
-
-            <button type="button" onclick="javascript:history.back()" class="btn btn-success col-auto">뒤로가기</button>
-
-            <div class="text-end">
-                <button type="button" th:onclick="|location.href='@{/freeBoard/passwordView(id=*{id},option=0)  }'|"  class="btn btn-secondary">수정</button>
-                <button type="button" th:onclick="|location.href='@{/freeBoard/passwordView(id=*{id},option=1)  }'|"  class="btn btn-secondary">삭제</button>
+            <div class="bottomDiv m-2">
+                <button type="button" onclick="javascript:history.back()" class="btn btn-success col-auto">뒤로가기</button>
+                <div class="text-end">
+                    <button type="button" th:onclick="|location.href='@{/freeBoard/passwordView(id=*{id},option=0)  }'|"
+                            class="btn btn-secondary">수정
+                    </button>
+                    <button type="button" th:onclick="|location.href='@{/freeBoard/passwordView(id=*{id},option=1)  }'|"
+                            class="btn btn-secondary">삭제
+                    </button>
+                </div>
             </div>
-        </div>
-
             <input type="hidden" th:field="*{id}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </section>
-
-
-
     <br>
+    <div class="commentTitle">
+        <b>댓글</b>
 
-        <div class="commentTitle">
-           <b>댓글</b>
+        <!--       댓글 관련         -->
+    </div>
+    <div class="commentBox" th:each="comments: ${comments}" th:if="${comments.reCommentID == null}">
+        <div th:if="${comments.reCommentID == null}" style="display:flex; ">
+            <div class="w10">
+                <b><span th:text="${comments.name}"></span></b>
+            </div>
 
+            <div class="pLeft text-start">
+                <span type="text" th:text="${comments.content}" th:onclick="reCommentView([[${comments.id}]])"
+                      style="cursor:pointer;"></span>
+            </div>
 
-            <!--       댓글 관련         -->
-        </div>
-            <div class="commentBox"  th:each="comments: ${comments}" th:if="${comments.reCommentID == null}">
-                <div th:if="${comments.reCommentID == null}" style="display:flex; ">
-                    <div class="w10">
-                        <b ><span  th:text="${comments.name}"></span></b>
-                    </div>
+            <div class="w3">
+                <img src="/images/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
+                     th:onclick="deleteDivOn([[${comments.id}]])">
 
-                    <div class="pLeft text-start" >
-                        <span type="text" th:text="${comments.content}" th:onclick="reCommentView([[${comments.id}]])" style="cursor:pointer;"  ></span>
-                    </div>
+                <div class="abcd" th:id="divBox+${comments.id}" style="cursor:pointer; visibility: hidden;">
+                    <input type="text" class="form-control" th:id="inputPW+${comments.id}" placeholder="비밀번호"
+                           style="width:60%; border-radius:5px;">
+                    <button th:onclick="deleteComment([[${comments.id}]])" class="btn btn-secondary"
+                            style="width:30%;display: flex; align-items: center; "><span
+                            style=" border-radius:10px; font-size:13px;">입력</span></button>
+                    <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff([[${comments.id}]])">
 
-                    <div class="w3">
-                        <img src="/images/deleteBtn.png"  alt="xx" style="width:12px; height:12px; cursor:pointer;" th:onclick="deleteDivOn([[${comments.id}]])">
-
-
-                        <div class="abcd" th:id="divBox+${comments.id}" style="cursor:pointer; visibility: hidden;">
-                            <input type="text" class="form-control" th:id="inputPW+${comments.id}" placeholder="비밀번호" style="width:60%; border-radius:5px;">
-                            <button th:onclick="deleteComment([[${comments.id}]])" class="btn btn-secondary" style="width:30%;display: flex; align-items: center; "><span style=" border-radius:10px; font-size:13px;">입력</span></button>
-                            <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff([[${comments.id}]])">
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="w20">
-                        <span   type="text" th:text="${#temporals.format(comments.regTime,'yyyy-MM-dd HH:mm')}"></span>
-                    </div>
                 </div>
-
-
-            <!--       대댓글 관련         -->
-
-                <div th:each="a: ${a}" style="padding: 0.3%;border-top: 1px solid lightgray ;padding-left:20px ;display:flex; " th:if="${comments.id == a.reCommentID}" >
-
-                        <div class="w10">
-                            <b ><span  th:text="ㄴ+${a.name}"></span></b>
-                        </div>
-
-                        <div class="pLeft text-start">
-                            <span type="text" th:text="${a.content}"  ></span>
-                        </div>
-
-                        <div class="w20">
-                            <span   type="text" th:text="${#temporals.format(comments.regTime,'yyyy-MM-dd HH:mm')}"></span>
-                        </div>
-
-                        <div class="w3">
-                            <img src="/images/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;" th:onclick="deleteDivOn2([[${a.id}]])">
-
-
-                            <div class="abcd" th:id="divBox2+${a.id}" style="cursor:pointer; visibility: hidden;">
-                                <input type="text" class="form-control" th:id="inputPW2+${a.id}" placeholder="비밀번호" style="width:60%; border-radius:5px;">
-                                <button th:onclick="deleteComment2([[${a.id}]])" class="btn btn-secondary" style="width:30%;display: flex; align-items: center; "><span style=" border-radius:10px; font-size:13px;">입력</span></button>
-                                <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff2([[${a.id}]])">
-
-                            </div>
-
-                        </div>
-                </div>
-
-
-
-
-
-                <div class="reCommentInput" th:id="asd+${comments.id}" style="display:none; ">
-                        <div class="w15">
-                            <div >
-                                <input type="text" th:id="reCommentName+${comments.id}" placeholder="이름" class="form-control">
-                            </div >
-                            <div class="w100">
-                                <input type="text" th:id="reCommentPW+${comments.id}" placeholder="비밀번호" class="form-control">
-                            </div>
-                        </div>
-                        <textarea  class="form-control w65" th:id="reCommentContent+${comments.id}" ></textarea>
-                        <button  type="button"   class="btn btn-secondary w10"  th:onclick="reComment([[${comments.id}]])">입력</button>
-                    </div>
-
-
 
             </div>
 
 
+            <div class="w20">
+                <span type="text" th:text="${#temporals.format(comments.regTime,'yyyy-MM-dd HH:mm')}"></span>
+            </div>
+        </div>
 
+        <!--       대댓글 관련         -->
 
+        <div th:each="a: ${a}" style="padding: 0.3%;border-top: 1px solid lightgray ;padding-left:20px ;display:flex; "
+             th:if="${comments.id == a.reCommentID}">
 
+            <div class="w10">
+                <b><span th:text="ㄴ+${a.name}"></span></b>
+            </div>
+
+            <div class="pLeft text-start">
+                <span type="text" th:text="${a.content}"></span>
+            </div>
+
+            <div class="w20">
+                <span type="text" th:text="${#temporals.format(comments.regTime,'yyyy-MM-dd HH:mm')}"></span>
+            </div>
+
+            <div class="w3">
+                <img src="/images/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
+                     th:onclick="deleteDivOn2([[${a.id}]])">
+
+                <div class="abcd" th:id="divBox2+${a.id}" style="cursor:pointer; visibility: hidden;">
+                    <input type="text" class="form-control" th:id="inputPW2+${a.id}" placeholder="비밀번호"
+                           style="width:60%; border-radius:5px;">
+                    <button th:onclick="deleteComment2([[${a.id}]])" class="btn btn-secondary"
+                            style="width:30%;display: flex; align-items: center; "><span
+                            style=" border-radius:10px; font-size:13px;">입력</span></button>
+                    <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff2([[${a.id}]])">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="reCommentInput" th:id="asd+${comments.id}" style="display:none; ">
+            <div class="w15">
+                <div>
+                    <input type="text" th:id="reCommentName+${comments.id}" placeholder="이름" class="form-control">
+                </div>
+                <div class="w100">
+                    <input type="text" th:id="reCommentPW+${comments.id}" placeholder="비밀번호" class="form-control">
+                </div>
+            </div>
+            <textarea class="form-control w65" th:id="reCommentContent+${comments.id}"></textarea>
+            <button type="button" class="btn btn-secondary w10" th:onclick="reComment([[${comments.id}]])">입력</button>
+        </div>
+    </div>
 
     <br>
-
 
     <div class="commentInput">
         <div class="w15">
-            <div >
+            <div>
                 <input type="text" id="commentName" placeholder="이름" class="form-control">
-            </div >
+            </div>
             <div class="w100">
-                 <input type="text" id="commentPW" placeholder="비밀번호" class="form-control">
+                <input type="text" id="commentPW" placeholder="비밀번호" class="form-control">
             </div>
         </div>
-        <textarea  class="form-control w65" id="commentContent" ></textarea>
-
-
-        <button  type="button" th:onclick="comment()"  class="btn btn-secondary w10">입력</button>
+        <textarea class="form-control w65" id="commentContent"></textarea>
+        <button type="button" th:onclick="comment()" class="btn btn-secondary w10">입력</button>
     </div>
-
 </div>
-
-
-
 </html>

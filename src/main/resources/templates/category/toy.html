@@ -12,7 +12,10 @@
     </div>
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
-        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
+        <p class="searchTitle" th:text="${itemSearchDto.searchQuery} + ' 검색결과 ' + ${items.getTotalElements()} + '개'"></p>
+    </div>
+    <div th:unless="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="searchTitle" th:text="${itemSearchDto.searchQuery} + ' 전체 ' + ${items.getTotalElements()} + '개'"></p>
     </div>
     <div class="container">
         <div class="row row-cols-5">
@@ -32,6 +35,57 @@
                     </div>
                 </div>
             </th:block>
+        </div>
+    </div>
+
+    <div th:with="start=${(items.number/maxPage)*maxPage +1},
+        end=(${(items.totalPages == 0) ? 1 : (start + (maxPage-1) < items.totalPages ?
+        start + (maxPage - 1) : items.totalPages)})">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${items.number eq 0}?'disabled'">
+                <a th:href="@{'/menu/snack' + ${items.number-1}}"
+                   aria-label='Previous' class="page-link">
+                    <span aria-hidden="true">이전</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
+                th:classappend="${items.number eq page-1}?'active':''">
+                <a th:href="@{'/menu/snack/' + ${page -1}}"
+                   th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+            <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled'">
+                <a th:href="@{'/menu/snack/'+ ${items.number+1}}"
+                   aria-label="Next" class="page-link">
+                    <span aria-hidden="true">다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container col-6" th:object="${itemSearchDto}">
+        <div class="input-group mb-2">
+            <select th:field="*{searchDateType}" class="form-control search-form">
+                <option value="all">전체 기간</option>
+                <option value="1d">1일</option>
+                <option value="1w">1주</option>
+                <option value="1m">1개월</option>
+                <option value="6m">6개월</option>
+            </select>
+            <select th:field="*{searchSellStatus}" class="form-control search-form">
+                <option value="">판매 상태(전체)</option>
+                <option value="SELL">판매</option>
+                <option value="SOLD_OUT">품절</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <div class="col-2 me-2">
+                <select th:field="*{searchBy}" class="form-control search-form">
+                    <option value="itemNm">상품명</option>
+                    <option value="createdBy">등록자</option>
+                </select>
+            </div>
+            <input th:field="*{searchQuery}" type="text" class="form-control me-2" placeholder="검색어를 입력해주세요">
+            <button id="searchBtn" type="submit" class="btn btn-secondary col-2" onclick="page(0)">검색</button>
         </div>
     </div>
 </div>

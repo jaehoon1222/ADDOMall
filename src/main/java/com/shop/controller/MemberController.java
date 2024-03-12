@@ -62,24 +62,19 @@ public class MemberController {
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg","아이디 또는 비밀번호를 확인해주세요");
-        return "/member/memberLoginForm";
+        return "member/memberLoginForm";
     }
 
-    @GetMapping(value = "/myPage/userInfo")
+    @GetMapping(value = "/userInfo")
     public String myPage( Model model, Principal principal) {
 
 
         MemberFormDto memberFormDto = memberService.getMemberInfo(principal.getName());
         model.addAttribute("memberFormDto",memberFormDto);
 
-        return "/member/memberForm";
+        return "member/memberForm";
     }
 
-    @GetMapping(value="/myPage")
-    public String myPage(){
-
-        return "member/myPage";
-    }
 
     @PostMapping(value="/myPage/userInfo")
     public String updateInfo(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Principal principal, Model model){

@@ -15,13 +15,7 @@
     </script>
 </th:block>
 
-
-
-
-
 <th:block layout:fragment="css">
-
-
     <style>
 
         .carousel-inner > .item {
@@ -91,71 +85,46 @@
 
 
 <div layout:fragment="content" class="aaaa">
-
-
-
     <div class="titleHeader">
         <div class="d50 dMiddle">
-
             <h1>
                 게시글 작성
             </h1>
             <p style="color:red;">쉬운 비밀번호를 입력하면 타인의 수정, 삭제가 쉽습니다.<br>
                 음란물, 차별, 비하, 혐오 및 초상권, 저작권 침해 게시물은 민, 형사상의 책임을 질 수 있습니다.</p>
-
         </div>
-
-
     </div>
-
-
-
-
     <section class="boardSize">
         <form action="/freeBoard/update" role="form" method="post" th:object="${boardContentDto}">
             <div class="href-target" id="input-types"></div>
-
-
             <br>
-
-
-
-
-
-
-
             <div class="nice-form-group" th:if="${member == null}">
                 <label>작성자</label>
-                <input type="text"  class="form-control" th:field="*{name}" placeholder="이름을 입력하세요" />
+                <input type="text" class="form-control" th:field="*{name}" placeholder="이름을 입력하세요"/>
                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect date</p>
             </div>
 
             <div class="nice-form-group" th:if="${member == null}">
                 <label>비밀번호</label>
-                <input type="password" class="form-control" th:field="*{password}" placeholder="비밀번호를 입력하세요" />
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect date</p>
+                <input type="password" class="form-control" th:field="*{password}" placeholder="비밀번호를 입력하세요"/>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect
+                    date</p>
             </div>
 
-
-
-
-            <div class="nice-form-group" >
+            <div class="nice-form-group">
                 <label>제목</label>
-                <input type="text" class="form-control" th:field="*{boardName}" placeholder="제목을 입력하세요." value="" />
-                <p th:if="${#fields.hasErrors('boardName')}" th:errors="*{boardName}" class="fieldError">Incorrect date</p>
+                <input type="text" class="form-control" th:field="*{boardName}" placeholder="제목을 입력하세요." value=""/>
+                <p th:if="${#fields.hasErrors('boardName')}" th:errors="*{boardName}" class="fieldError">Incorrect
+                    date</p>
             </div>
 
             <hr>
 
             <div class="nice-form-group">
-                <textarea  th:field="*{content}" class="form-control" rows="20" placeholder="게시글 내용을 입력하세요" ></textarea>
+                <textarea th:field="*{content}" class="form-control" rows="20" placeholder="게시글 내용을 입력하세요"></textarea>
                 <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect date</p>
 
             </div>
-
-
-
-
 
             <br>
 
@@ -167,18 +136,9 @@
             </div>
 
 
-
-            <input type="hidden"th:field="*{id}">
-
+            <input type="hidden" th:field="*{id}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </section>
-
-
-
-
 </div>
-
-
-
 </html>

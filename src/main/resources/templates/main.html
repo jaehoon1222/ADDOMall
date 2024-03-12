@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-<!-- 사용자 CSS 추가 -->
 
+
+
+<!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
         .card-text{
@@ -22,12 +24,6 @@
         .img_1 .img_2{
             width: 100%;
         }
-        .col{
-            margin-bottom:10rem;
-        }
-
-
-
     </style>
 </th:block>
 
@@ -59,20 +55,15 @@
         </button>
     </div>
 
-<!--    <div class="main-coupon mt-2 d-flex">-->
-<!--        <a href="#">-->
-<!--            <div class="coupon_1"><img class="img_1" src="/img/쿠폰1.jpg" alt="신년맞이 쿠폰"></div>-->
-<!--        </a>-->
-<!--        <a href="#">-->
-<!--            <div class="coupon_2"><img class="img_2" src="/img/쿠폰2.jpg" alt=""></div>-->
-<!--        </a>-->
-<!--    </div>-->
+
 
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
 
-    <h3 style="margin-top:10rem;">
-        <span>🐕‍🦺영양 가득 아또몰 대표 사료!</span>
-    </h3>
+
+    <div class="mainTitle">🐕‍🦺영양 가득 아또몰 대표 사료!
+        <a href="/menu/food"><span class="more">더보기<i class="bi bi-chevron-double-right"></i></span>
+        </a>
+    </div>
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>
@@ -97,9 +88,10 @@
     </div>
     </div>
 
-    <h3>
-        <span>🎉강아지 간식은 이걸로 끝!</span>
-    </h3>
+    <div class="mainTitle">🎉강아지 간식은 이걸로 끝!
+        <a href="/menu/snack"><span class="more">더보기<i class="bi bi-chevron-double-right"></i></span>
+        </a>
+    </div>
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>
@@ -124,9 +116,10 @@
         </div>
     </div>
 
-    <h3>
-        <span>💗우리 강아지 피부는 소중하니까</span>
-    </h3>
+    <div class="mainTitle">💗우리 강아지 피부는 소중하니까
+        <a href="/menu/beauty"><span class="more">더보기<i class="bi bi-chevron-double-right"></i></span>
+        </a>
+    </div>
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>
@@ -151,9 +144,10 @@
         </div>
     </div>
 
-    <h3>
-        <span>🦮새 옷 입고 봄나들이 가요!</span>
-    </h3>
+    <div class="mainTitle">🦮새 옷 입고 봄나들이 가요!
+        <a href="/menu/fashion"><span class="more">더보기<i class="bi bi-chevron-double-right"></i></span>
+        </a>
+    </div>
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
     </div>

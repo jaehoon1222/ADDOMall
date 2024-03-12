@@ -11,41 +11,23 @@
 </head>
 
 <th:block layout:fragment="script">
-
-
-
-
     <script th:inline="javascript">
-
-
 
         function updateaa(){
             var id = document.getElementById('id').value;
             var result= confirm("수정하겠습니까?");
-
             if(result){
-                location.href='/aBoard/update/'+id;
-
-
+                location.href='/notice/update/'+id;
             }
-
         }
 
         function deleteaa(){
             var id = document.getElementById('id').value;
             var result= confirm("삭제하겠습니까?");
-
                 if(result){
-                    location.href='/aBoard/deleteBoard?id='+id;
-
+                    location.href='/notice/deleteBoard?id='+id;
                 }
-
-
         }
-
-
-
-
 
     </script>
 </th:block>
@@ -221,54 +203,23 @@
         <div class="href-target" id="input-types"></div>
         <h1 th:text="*{boardName}">
         </h1>
-
-
             <span class="spanRight" th:text="*{name}"></span>  <span class="spanaaa" th:text="*{#temporals.format(regTime,'yyyy-MM-dd HH:mm')}"></span>
-
-
         <hr>
-
-
         <div class="nice-form-group h300px abc" >
-
             <div  style="white-space:pre;" th:text="*{content}" ></div>
-
-
         </div>
             <hr>
             <br>
-
-
-
         <div class="bottomDiv m-2">
-
-
-
             <button type="button" onclick="javascript:history.back()" class="btn btn-success col-auto">뒤로가기</button>
-
             <div class="text-end">
                 <button type="button" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" onclick="updateaa()"  class="btn btn-secondary">수정</button>
                 <button type="button" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" onclick="deleteaa()"  class="btn btn-secondary">삭제</button>
             </div>
         </div>
-
             <input type="hidden" th:field="*{id}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </section>
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
-
 </html>

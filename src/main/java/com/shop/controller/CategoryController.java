@@ -41,6 +41,11 @@ public class CategoryController {
             itemSearchDto.setSearchQuery("");
         }
         Page<MainItemDto> items = itemService.getSnackItemPage(itemSearchDto, pageable);
+        System.out.println(items.getContent().size());
+        System.out.println(items.getTotalElements());
+        System.out.println(items.getNumberOfElements());
+        System.out.println(items.getNumber());
+        System.out.println(items.getSize());
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
@@ -105,6 +110,6 @@ public class CategoryController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
 
-        return "category/toy";
+        return "category/fashion";
     }
 }

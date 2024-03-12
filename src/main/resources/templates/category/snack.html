@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            $("searchBtn").on("click",function(e){
+                e.preventDefault(); //검색버튼 클릭시 form 태그 전송을 막습니다.
+                page(0);
+            });
+        });
+
+        function page(page){
+            var searchDateType = $("#searchDateType").val();
+            var searchSellStatus = $("#searchSellStatus").val();
+            var searchBy = $("#searchBy").val();
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/menu/snack/" + page + "?searchDateType=" + searchDateType
+            + "&searchSellStatus=" + searchSellStatus + "&searchBy=" + searchBy
+            + "&searchQuery=" + searchQuery;
+        }
+    </script>
+</th:block>
 
 <div layout:fragment="content">
     <div class="titleHeader">
@@ -11,8 +32,13 @@
         </div>
     </div>
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
-        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색결과'"></p>
+        <p class="searchTitle"
+           th:text="${itemSearchDto.searchQuery} + ' 검색결과 ' + ${items.getTotalElements()} + '개'"></p>
+    </div>
+    <div th:unless="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="searchTitle" th:text="${itemSearchDto.searchQuery} + ' 전체 ' + ${items.getTotalElements()} + '개'"></p>
     </div>
     <div class="container">
         <div class="row row-cols-5">
@@ -26,12 +52,64 @@
                             <div class="card-body mt-3">
                                 <h5 class="item_name">[[${item.itemNm}]]</h5>
                                 <h6 class="item_detail">[[${item.itemDetail}]]</h6>
-                                <h4 class="item_price"th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
+                                <h4 class="item_price"
+                                    th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}"></h4>
                             </div>
                         </a>
                     </div>
                 </div>
             </th:block>
+        </div>
+    </div>
+
+    <div th:with="start=${(items.number/maxPage)*maxPage +1},
+        end=(${(items.totalPages == 0) ? 1 : (start + (maxPage-1) < items.totalPages ?
+        start + (maxPage - 1) : items.totalPages)})">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${items.number eq 0}?'disabled'">
+                <a th:href="@{'/menu/snack' + ${items.number-1}}"
+                   aria-label='Previous' class="page-link">
+                    <span aria-hidden="true">이전</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
+                th:classappend="${items.number eq page-1}?'active':''">
+                <a th:href="@{'/menu/snack/' + ${page -1}}"
+                   th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+            <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled'">
+                <a th:href="@{'/menu/snack/'+ ${items.number+1}}"
+                   aria-label="Next" class="page-link">
+                    <span aria-hidden="true">다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container col-6" th:object="${itemSearchDto}">
+        <div class="input-group mb-2">
+            <select th:field="*{searchDateType}" class="form-control search-form">
+                <option value="all">전체 기간</option>
+                <option value="1d">1일</option>
+                <option value="1w">1주</option>
+                <option value="1m">1개월</option>
+                <option value="6m">6개월</option>
+            </select>
+            <select th:field="*{searchSellStatus}" class="form-control search-form">
+                <option value="">판매 상태(전체)</option>
+                <option value="SELL">판매</option>
+                <option value="SOLD_OUT">품절</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <div class="col-2 me-2">
+                <select th:field="*{searchBy}" class="form-control search-form">
+                    <option value="itemNm">상품명</option>
+                    <option value="createdBy">등록자</option>
+                </select>
+            </div>
+            <input th:field="*{searchQuery}" type="text" class="form-control me-2" placeholder="검색어를 입력해주세요">
+            <button id="searchBtn" type="submit" class="btn btn-secondary col-2" onclick="page(0)">검색</button>
         </div>
     </div>
 </div>
