@@ -1,6 +1,7 @@
 package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
+import com.shop.constant.Type;
 import com.shop.entity.Item;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class ItemFormDto {
     @NotBlank(message = "상품명은 필수 입력 값입니다.")
     private String itemNm;
 
-    private String type;
+    private Type type;
 
     @NotNull(message = "가격은 필수 입력 값입니다.")
     private Integer price;

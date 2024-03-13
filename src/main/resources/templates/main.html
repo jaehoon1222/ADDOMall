@@ -24,6 +24,17 @@
         .img_1 .img_2{
             width: 100%;
         }
+
+        #carouselExampleIndicators {
+            max-width: 100%; /* 원하는 크기로 조정 */
+            margin: auto; /* 가운데 정렬을 위해 */
+        }
+
+        /* 캐러셀 이미지 크기 조정 */
+        .carousel-item img {
+            width: 100%; /* 부모 요소에 대해 100%의 너비로 설정하여 크기 조정 */
+            height: 500px; /* 가로 너비에 맞게 비율 유지 */
+        }
     </style>
 </th:block>
 
@@ -36,13 +47,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/carousel_1.png" class="d-block w-100" alt="...">
+                <img src="/img/car1.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/img/carousel_2.png" class="d-block w-100" alt="...">
+                <img src="/img/car2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="/img/carousel_3.png" class="d-block w-100" alt="...">
+                <img src="/img/car3.png" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

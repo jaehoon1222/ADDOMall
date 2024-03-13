@@ -51,12 +51,12 @@ public class MemberController {
 
     @GetMapping(value = "/login")
     public String loginMember(){
-        return "/member/memberLoginForm";
+        return "member/memberLoginForm";
     }
 
     @GetMapping(value = "/socialLogin")
     public String socialLogin(){
-        return "/member/socialLoginForm";
+        return "member/socialLoginForm";
     }
 
     @GetMapping(value = "/login/error")

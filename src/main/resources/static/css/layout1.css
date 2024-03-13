@@ -157,6 +157,12 @@ a:hover{
     opacity: 1;
     position: fixed;
 }
+
+.swiper {
+  width: 600px;
+  height: 300px;
+}
+
 #scrollRight .quickBtn { position: absolute; top: 100px; right: 0px; width: 42px; z-index: 1;}
 #scrollRight .quickBtn li { float: right;  border: 1px solid #eaeaea; margin-top: -1px; background-color: #fff; }
 #scrollRight .quickBtn li a {
