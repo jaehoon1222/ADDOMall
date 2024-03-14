@@ -264,12 +264,14 @@
                                     <span th:id="'price_' + ${cartItem.cartItemId}" th:data-price="${cartItem.price}"
                                           th:text="${#numbers.formatInteger(cartItem.price, 3 , 'COMMA')} + '원'" class="align-self-center mr-2">
                                     </span>
-                                    <input type="number" class="ms-2" name="count" th:id="'count_' + ${cartItem.cartItemId}"
+
+                                    <input type="number" style="border:1px solid black;" class="ms-2" name="count" th:id="'count_' + ${cartItem.cartItemId}"
                                            th:value="${cartItem.count}" min="1" onchange="changeCount(this)">
-                                    <button type="button" class="close" aria-label="Close">
+                                    <button type="button" style="border:1px solid black;" class="close" aria-label="Close">
                                         <span aria-hidden="true" th:data-id="${cartItem.cartItemId}"
                                               onclick="deleteCartItem(this)">&times;</span>
                                     </button>
+
                                 </span>
                         </div>
                     </div>

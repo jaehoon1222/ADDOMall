@@ -133,7 +133,8 @@
                         alert('로그인 후 이용해주세요.');
                         location.href='/members/login';
                     }else{
-                        alert(jqXHR.responseText);
+                        alert("로그인 후 이용해주세요.");
+                        location.href='/members/login';
                     }
                 }
             });
@@ -196,7 +197,7 @@
                     <div class="input-group-prepend">
                         <span class="h6 tit">수량</span>
                     </div>
-                    <input type="number" name="count" id="count"  class="w-25 text-center ms-3" value="1" min="1">
+                    <input type="number" name="count" id="count" style="border:1px solid black;"  class="w-25 text-center ms-3" value="1" min="1">
                 </div>
                 <div class="h4 text-left">
                     <input type="hidden" th:value="${item.price}" id="deli" name="price">

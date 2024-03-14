@@ -425,8 +425,7 @@
             </div>
 
             <div class="w3">
-                <img src="/images/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
-                     th:onclick="deleteDivOn([[${comments.id}]])">
+
 
                 <div class="abcd" th:id="divBox+${comments.id}" style="cursor:pointer; visibility: hidden;">
                     <input type="text" class="form-control" th:id="inputPW+${comments.id}" placeholder="비밀번호"
@@ -434,7 +433,7 @@
                     <button th:onclick="deleteComment([[${comments.id}]])" class="btn btn-secondary"
                             style="width:30%;display: flex; align-items: center; "><span
                             style=" border-radius:10px; font-size:13px;">입력</span></button>
-                    <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff([[${comments.id}]])">
+                    <img src="/img/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff([[${comments.id}]])">
 
                 </div>
 
@@ -443,6 +442,10 @@
 
             <div class="w20">
                 <span type="text" th:text="${#temporals.format(comments.regTime,'yyyy-MM-dd HH:mm')}"></span>
+            </div>
+            <div class="d-flex" style="align-items:center;">
+            <img src="/img/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
+                 th:onclick="deleteDivOn([[${comments.id}]])">
             </div>
         </div>
 
@@ -464,7 +467,7 @@
             </div>
 
             <div class="w3">
-                <img src="/images/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
+                <img src="/img/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
                      th:onclick="deleteDivOn2([[${a.id}]])">
 
                 <div class="abcd" th:id="divBox2+${a.id}" style="cursor:pointer; visibility: hidden;">
@@ -473,7 +476,7 @@
                     <button th:onclick="deleteComment2([[${a.id}]])" class="btn btn-secondary"
                             style="width:30%;display: flex; align-items: center; "><span
                             style=" border-radius:10px; font-size:13px;">입력</span></button>
-                    <img src="/images/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff2([[${a.id}]])">
+                    <img src="/img/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff2([[${a.id}]])">
 
                 </div>
 
