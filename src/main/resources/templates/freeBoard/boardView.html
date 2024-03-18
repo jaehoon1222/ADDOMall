@@ -15,11 +15,9 @@
 
             if(reView.style.display=='none'){
                 reView.style.display='flex';
-
             }else{
     	        reView.style.display = 'none';
             }
-
         }
 
 <!--댓글 지우고 뷰 오프-->
@@ -27,7 +25,6 @@
             var id ="divBox"+a;
             var view = document.getElementById(id);
             view.style.visibility="visible";
-
         }
         function viewOff(a){
             var id ="divBox"+a;
@@ -35,34 +32,23 @@
             view.style.visibility="hidden";
         }
 
-
-
 <!--대댓글 지우고 뷰 오프-->
         function viewOff2(a){
             var id ="divBox2"+a;
             var view = document.getElementById(id);
-
-
             view.style.visibility="hidden";
-
-
         }
         function deleteDivOn2(a){
             var id ="divBox2"+a;
             var view = document.getElementById(id);
             view.style.visibility="visible";
-
         }
-
-
-
 
         <!-- 댓글 입력 함수 -->
         function comment() {
 
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
-
 
             var id = document.getElementById('id').value;
             var commentName = document.getElementById('commentName').value;
@@ -91,22 +77,16 @@
 
                 if(response==="미입력"){
                     alert("댓글의 내용 및 비밀번호를 입력하여 주세요");
-
                 }else{
                     alert(response);
                     location.reload();
-
                 }
-
-
-
             },
             error : function(jqXHR, status , error){
                 alert(jqXHR.responseText);
             }
             });
         }
-
 
         <!-- 대 댓글 입력 함수 -->
         function reComment(contentId) {
@@ -117,9 +97,6 @@
             var cn="reCommentName"+contentId;
             var cp="reCommentPW"+contentId;
             var cc="reCommentContent"+contentId;
-
-
-
 
             var commentName = document.getElementById(cn).value;
             var commentPW = document.getElementById(cp).value;
@@ -163,10 +140,8 @@
             var a = "inputPW"+contentId;
             var inputPW = document.getElementById(a).value;
 
-
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
-
 
             var url = "/freeBoard/deleteComment";
             var paramData = {
@@ -175,7 +150,6 @@
             };
 
             $.ajax({
-
                 url : url,
                 type: 'POST',
                 data : paramData,
@@ -202,10 +176,8 @@
             var a = "inputPW2"+contentId;
             var inputPW = document.getElementById(a).value;
 
-
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
-
 
             var url = "/freeBoard/deleteComment";
             var paramData = {
@@ -276,22 +248,15 @@
             padding-right: 10px;
         }
 
-
         .boardSize{
-
             padding-top : 3%;
             width: 70%;
             height: 80%;
-
             margin: 0 auto;
-
         }
         .bottomDiv {
             display: flex;
             justify-content:space-between;
-
-
-
         }
 
         .commentBox{
@@ -299,13 +264,9 @@
             border-bottom: 1px solid lightgray ;
             padding: 0.3%;
             margin: 0 auto;
-
-
-
         }
 
         .commentTitle{
-
             width: 70%;
             margin: 0 auto;
             border-bottom: 2px solid;
@@ -348,9 +309,8 @@
         .w20{
             width:20%;
         }
-        .abc{
+        .div_content{
             margin:20px;
-
         }
 
         .reCommentInput{
@@ -364,17 +324,23 @@
            width:3%;
            display: flex;
            align-items: center;
-
         }
-        .abcd{
+        .co_pw{
             width:200px;
             height:40px;
-            background-color:red;
+            background-color:#29367c;
             position:absolute;
             transform: translate(-50px, 20px);
             display:flex;
-            border: 3px solid red;
-            border-radius:10px;
+            border: 3px solid #29376c;
+        }
+
+        .del_pw{
+            width:30%;
+            display: flex;
+            align-items: center;
+            background-color:#3b3890;
+            color: white;
         }
     </style>
 </th:block>
@@ -387,7 +353,7 @@
             <span class="spanRight" th:text="*{name}"></span> <span class="spanaaa"
                                                                     th:text="*{#temporals.format(regTime,'yyyy-MM-dd HH:mm')}"></span>
             <hr>
-            <div class="nice-form-group h300px abc">
+            <div class="nice-form-group h300px div_content">
                 <div style="white-space:pre;" th:text="*{content}"></div>
             </div>
             <hr>
@@ -427,16 +393,14 @@
             <div class="w3">
 
 
-                <div class="abcd" th:id="divBox+${comments.id}" style="cursor:pointer; visibility: hidden;">
+                <div class="co_pw" th:id="divBox+${comments.id}" style="cursor:pointer; visibility: hidden;">
                     <input type="text" class="form-control" th:id="inputPW+${comments.id}" placeholder="비밀번호"
                            style="width:60%; border-radius:5px;">
-                    <button th:onclick="deleteComment([[${comments.id}]])" class="btn btn-secondary"
-                            style="width:30%;display: flex; align-items: center; "><span
-                            style=" border-radius:10px; font-size:13px;">입력</span></button>
+                    <button th:onclick="deleteComment([[${comments.id}]])" class="btn del_pw"><span
+                            style=" border-radius:10px; font-size:13px;">입력</span>
+                    </button>
                     <img src="/img/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff([[${comments.id}]])">
-
                 </div>
-
             </div>
 
 
@@ -470,16 +434,14 @@
                 <img src="/img/deleteBtn.png" alt="xx" style="width:12px; height:12px; cursor:pointer;"
                      th:onclick="deleteDivOn2([[${a.id}]])">
 
-                <div class="abcd" th:id="divBox2+${a.id}" style="cursor:pointer; visibility: hidden;">
+                <div class="co_pw" th:id="divBox2+${a.id}" style="cursor:pointer; visibility: hidden;">
                     <input type="text" class="form-control" th:id="inputPW2+${a.id}" placeholder="비밀번호"
                            style="width:60%; border-radius:5px;">
-                    <button th:onclick="deleteComment2([[${a.id}]])" class="btn btn-secondary"
-                            style="width:30%;display: flex; align-items: center; "><span
-                            style=" border-radius:10px; font-size:13px;">입력</span></button>
+                    <button th:onclick="deleteComment2([[${a.id}]])" class="btn del_pw">
+                        <span style=" border-radius:10px; font-size:13px;">입력</span>
+                    </button>
                     <img src="/img/deBtn2.png" alt="xx" style="width:20%" th:onclick="viewOff2([[${a.id}]])">
-
                 </div>
-
             </div>
         </div>
 
