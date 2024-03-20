@@ -15,62 +15,14 @@
    <br>
  </h3>
  <h3>개발 환경</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Teck</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>OS</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>Language</td>
-      <td><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
-      <img src="https://img.shields.io/badge/Heroku-430098?style=flat-square&logo=Heroku&logoColor=white"/>
-      <img src="https://img.shields.io/badge/Bootstrapap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/>
-       <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"/>
-      </td>
-    </tr>
-     <tr>
-      <td>DB</td>
-      <td><img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariaDB&logoColor=white"/>
-      <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
-      </td>
-    </tr>
-     <tr>
-      <td>IDE</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>FrameWork</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>Template</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>Server</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>Cloud</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>API</td>
-      <td></td>
-    </tr>
-     <tr>
-      <td>Version Control</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+  Front : HTML, CSS3, JamvaScript, BootStrap, JQuery 
+  Back-end : SpringBoot
+  DB : MySQL, MariaDB
+  IDE : IntelliJ Idea
+  Server : Apache Tomcat
+  API : KAKAO Login, NAVER Login, GOOGLE Login, KAKAO Map, KAKAO Address, PortOne
+  버전 관리 : Github, git
+  서비스 배포 환경 : AMAZON AWS
 <br>
 
 <h3>ERD</h3>
