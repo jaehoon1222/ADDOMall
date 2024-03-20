@@ -6,7 +6,11 @@
   <li>테스트 ID: admin@email.com(관리자), user@email.com(유저)</li>
   <li>비밀번호: 12341234</li>
   <br>
-  
+  <h2 class="subTitle">프로젝트 소개</h2>
+ <ul style="text-decoraion:none">
+  <li>아또몰은 강아지 용품 전용 쇼핑몰입니다.</li>
+  <li>관리자는 상품 등록 및 수정 삭제가 가능하고 유저는 상품 장바구니 담기, 주문 및 취소가 가능합니다.</li>
+  <li>게시판을 통해 자유로운 소통이 가능합니다.</li>
 <table>
   <thead>
     <tr>
