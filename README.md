@@ -15,13 +15,20 @@
    <br>
  </h3>
  <h3>개발 환경</h3>
-  Front : HTML, CSS3, JamvaScript, BootStrap, JQuery 
+  Front : HTML, CSS3, JamvaScript, BootStrap, JQuery
+  <br>
   Back-end : SpringBoot
+  <br>
   DB : MySQL, MariaDB
+  <br>
   IDE : IntelliJ Idea
+  <br>
   Server : Apache Tomcat
+  <br>
   API : KAKAO Login, NAVER Login, GOOGLE Login, KAKAO Map, KAKAO Address, PortOne
+  <br>
   버전 관리 : Github, git
+  <br>
   서비스 배포 환경 : AMAZON AWS
 <br>
 
