@@ -1,4 +1,11 @@
-<h1>🐶 강아지 전용 쇼핑몰 아또몰</h1>
+<style>
+  .title{
+    border-bottom: 1px solid black;
+  }
+</style>
+
+<h1 class="Title">🐶 강아지 전용 쇼핑몰 아또몰</h1>
+
 ![아또몰](https://github.com/jaehoon1222/ADDOMall/assets/148930608/f13bdbc7-eb30-4daa-8ff1-a677d7846749)
 <ul style="text-decoraion:none">
   <li>배포 URL: http://ec2-3-35-147-18.ap-northeast-2.compute.amazonaws.com</li>
