@@ -14,6 +14,48 @@
       <th>Teck</th>
     </tr>
   </thead>
+  <tbody>
+    <tr>
+      <td>OS</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>Language</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>DB</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>IDE</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>FrameWork</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>Template</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>Server</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>Cloud</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>API</td>
+      <td></td>
+    </tr>
+     <tr>
+      <td>Version Control</td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
 
 ![ERD](https://github.com/jaehoon1222/ADDOMall/assets/148930608/3755ac6e-6fb3-4183-9aaf-94e56982f5ea)
