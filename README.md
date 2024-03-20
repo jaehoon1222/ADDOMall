@@ -2,16 +2,17 @@
 
 ![아또몰](https://github.com/jaehoon1222/ADDOMall/assets/148930608/f13bdbc7-eb30-4daa-8ff1-a677d7846749)
 <div>
-  <p>배포 URL: http://ec2-3-35-147-18.ap-northeast-2.compute.amazonaws.com</li>
-  <li>테스트 ID: admin@email.com(관리자), user@email.com(유저)</li>
-  <li>비밀번호: 12341234</li>
+  <p>배포 URL: http://ec2-3-35-147-18.ap-northeast-2.compute.amazonaws.com</p>
+  <p>테스트 ID: admin@email.com(관리자), user@email.com(유저)</p>
+  <p>비밀번호: 12341234</p>
+</div>
   <br>
   <h2 class="subTitle">프로젝트 소개</h2>
- <ul style="list-style:none;">
-  <li>아또몰은 강아지 용품 전용 쇼핑몰입니다.</li>
-  <li>관리자는 상품 등록 및 수정 삭제가 가능하며, 유저는 상품 장바구니 담기와 주문 및 취소가 가능합니다.</li>
-  <li>게시판을 통해 자유로운 소통이 가능합니다.</li>
- </ul>
+ <div style="list-style:none;">
+  <p>아또몰은 강아지 용품 전용 쇼핑몰입니다.</p>
+  <p>관리자는 상품 등록 및 수정 삭제가 가능하며, 유저는 상품 장바구니 담기와 주문 및 취소가 가능합니다.</p>
+  <p>게시판을 통해 자유로운 소통이 가능합니다.</p>
+ </div>
 <table>
   <thead>
     <tr>
